@@ -17,6 +17,6 @@ module alu(ALUFunc, a, b,
 								(ALUFunc == `FUNC_NOT) ? ~a :
 								16'bx;
 
-	assign zero = (ALUResult == 16'b0) ? 1'b1 : 1'b0;
+	assign zero = (a == 16'b0) ? 1'b1 : 1'b0;
 
 endmodule // alu
