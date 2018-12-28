@@ -1,7 +1,9 @@
 module multicycle_mips_processor(clk, rst);
   input wire clk, rst;
-  wire PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToAcc, accWrite, ALUSrcA, ALUSrcB, PCSrc, ALUFunc;
-  wire opcode, zero;
+  wire PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToAcc, accWrite, ALUSrcA, ALUSrcB, PCSrc;
+  wire[1:0] ALUFunc;
+  wire [2:0]opcode;
+  wire zero;
 
   datapath DP(.clk(clk),
               .rst(rst),

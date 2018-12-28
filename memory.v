@@ -3,7 +3,7 @@ module memory(clk, rst, mem_read, mem_write, address, write_data,
 					read_data);
 	input wire clk, rst;
 	input wire mem_read, mem_write;
-	input wire[12:0] address
+	input wire[12:0] address;
 	input wire[15:0] write_data;
 	output wire[15:0] read_data;
 
@@ -11,28 +11,28 @@ module memory(clk, rst, mem_read, mem_write, address, write_data,
     	reg[15:0] memory[0:4095];
 
 	initial begin
-		{memory[1003], memory[1002], memory[1001], memory[1000]} = 32'd10;
-		{memory[1007], memory[1006], memory[1005], memory[1004]} = 32'd10;
-		{memory[1011], memory[1010], memory[1009], memory[1008]} = 32'd10;
-		{memory[1015], memory[1014], memory[1013], memory[1012]} = 32'd10;
-		{memory[1019], memory[1018], memory[1017], memory[1016]} = 32'd10;
-		{memory[1023], memory[1022], memory[1021], memory[1020]} = 32'd10;
-		{memory[1027], memory[1026], memory[1025], memory[1024]} = 32'd10;
-		{memory[1031], memory[1030], memory[1029], memory[1028]} = 32'd10;
-		{memory[1035], memory[1034], memory[1033], memory[1032]} = 32'd10;
-		{memory[1039], memory[1038], memory[1037], memory[1036]} = 32'd10;
+		memory[500] = 16'd2;
+		memory[501] = 16'd2;
+		memory[502] = 16'd2;
+		memory[503] = 16'd2;
+		memory[504] = 16'd2;
+		memory[505] = 16'd2;
+		memory[506] = 16'd3;
+		memory[507] = 16'd2;
+		memory[508] = 16'd2;
+		memory[509] = 16'd2;
 
-		{memory[1043], memory[1042], memory[1041], memory[1040]} = 32'd10;
-		{memory[1047], memory[1046], memory[1045], memory[1044]} = 32'd10;
-		{memory[1051], memory[1050], memory[1049], memory[1048]} = 32'd10;
-		{memory[1055], memory[1054], memory[1053], memory[1052]} = 32'd15;
-		{memory[1059], memory[1058], memory[1057], memory[1056]} = 32'd10;
-		{memory[1063], memory[1062], memory[1061], memory[1060]} = 32'd10;
-		{memory[1067], memory[1066], memory[1065], memory[1064]} = 32'd10;
-		{memory[1071], memory[1070], memory[1069], memory[1068]} = 32'd10;
-		{memory[1075], memory[1074], memory[1073], memory[1072]} = 32'd10;
-		{memory[1079], memory[1078], memory[1077], memory[1076]} = 32'd10;
-
+		memory[0] = {3'b100, 13'd500};
+		memory[1] = {3'b000, 13'd501};
+		memory[2] = {3'b000, 13'd502};
+		memory[3] = {3'b000, 13'd503};
+		memory[4] = {3'b000, 13'd504};
+		memory[5] = {3'b000, 13'd505};
+		memory[6] = {3'b000, 13'd506};
+		memory[7] = {3'b000, 13'd507};
+		memory[8] = {3'b000, 13'd508};
+		memory[9] = {3'b000, 13'd509};
+		memory[10] = {3'b101, 13'd800};
 	end
 
 

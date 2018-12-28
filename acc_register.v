@@ -1,6 +1,6 @@
 module acc_register(clk, rst, acc_in, acc_write,
-					ir_out);
-	input wire clk, rst, ir_write;
+					acc_out);
+	input wire clk, rst, acc_write;
 	input wire[15:0] acc_in;
 	output reg[15:0] acc_out;
 

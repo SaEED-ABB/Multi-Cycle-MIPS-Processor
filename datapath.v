@@ -7,8 +7,9 @@ module datapath(clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite
   pc_register PC(.clk(clk), .rst(rst), .pc_in(PCIn), .pc_write((zero & PCWriteCond) | PCWrite), .pc_out(PCOut));
 
   wire[15:0] IROut;
+  assign opcode = IROut[15:13];
   wire[12:0] memoryAddress;
-  mux2_13bit MUX_AT_MEMORY(.sel(IorD), .a0(PCOut), .a1(IROut), .which_a(memoryAddress));
+  mux2_13bit MUX_AT_MEMORY(.sel(IorD), .a0(PCOut), .a1(IROut[12:0]), .which_a(memoryAddress));
   wire[15:0] accOut, memOut;
   memory MEMORY(.clk(clk), .rst(rst), .address(memoryAddress), .write_data(accOut), .mem_read(memRead), .mem_write(memWrite), .read_data(memOut));
 
@@ -18,12 +19,12 @@ module datapath(clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite
 
   wire[15:0] ALUOut, accIn;
   mux2_16bit MUX_AT_ACC(.sel(memToAcc), .a0(ALUOut), .a1(MDROut), .which_a(accIn));
-  acc_reg ACC(.clk(clk), .rst(rst), .acc_in(accIn), .acc_out(accOut));
+  acc_register ACC(.clk(clk), .rst(rst), .acc_in(accIn), .acc_write(accWrite), .acc_out(accOut));
 
   wire[15:0] ALUInA, ALUInB;
-  mux2_16bit MUX_AT_ALU_A(.sel(ALUSrcA), .a0(PCOut), .a1(accOut), .which_a(ALUInA));
+  mux2_16bit MUX_AT_ALU_A(.sel(ALUSrcA), .a0({3'b0, PCOut}), .a1(accOut), .which_a(ALUInA));
   mux2_16bit MUX_AT_ALU_B(.sel(ALUSrcB), .a0(MDROut), .a1(16'b1), .which_a(ALUInB));
-  alu ALU(.a(ALUInA), .b(ALUInB), .alu_func(ALUFunc), .zero(zero), .alu_out(ALUOut));
+  alu ALU(.a(ALUInA), .b(ALUInB), .ALUFunc(ALUFunc), .zero(zero), .ALUResult(ALUOut));
 
-  mux2_16bit MUX_AT_PC(.sel(PCSrc), .a0(ALUOut), .a1(IROut), .which_a(PCIn));
+  mux2_13bit MUX_AT_PC(.sel(PCSrc), .a0(ALUOut[12:0]), .a1(IROut[12:0]), .which_a(PCIn));
 endmodule
