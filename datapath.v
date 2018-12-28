@@ -1,5 +1,5 @@
-module datapath(clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToReg, accWrite, ALUSrcA, ALUSrcB, PCSrc, opcode, ALUFunc);
-  input wire clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToReg, accWrite, ALUSrcA, ALUSrcB, PCSrc;
+module datapath(clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToAcc, accWrite, ALUSrcA, ALUSrcB, PCSrc, opcode, ALUFunc);
+  input wire clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToAcc, accWrite, ALUSrcA, ALUSrcB, PCSrc;
   input wire[1:0] ALUFunc;
   output wire[2:0] opcode;
 
@@ -17,7 +17,7 @@ module datapath(clk, rst, PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite
   mdr_register MDR(.clk(clk), .rst(rst), .mdr_in(memOut), .mdr_out(MDROut));
 
   wire[15:0] ALUOut, accIn;
-  mux2_16bit MUX_AT_ACC(.sel(memToReg), .a0(ALUOut), .a1(MDROut), .which_a(accIn));
+  mux2_16bit MUX_AT_ACC(.sel(memToAcc), .a0(ALUOut), .a1(MDROut), .which_a(accIn));
   acc_reg ACC(.clk(clk), .rst(rst), .acc_in(accIn), .acc_out(accOut));
 
   wire[15:0] ALUInA, ALUInB;

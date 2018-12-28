@@ -1,6 +1,6 @@
 module multicycle_mips_processor(clk, rst);
   input wire clk, rst;
-  wire PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToReg, accWrite, ALUSrcA, ALUSrcB, PCSrc, ALUFunc;
+  wire PCWriteCond, PCWrite, IorD, memRead, memWrite, IRWrite, memToAcc, accWrite, ALUSrcA, ALUSrcB, PCSrc, ALUFunc;
   wire opcode, zero;
 
   datapath DP(.clk(clk),
@@ -11,7 +11,7 @@ module multicycle_mips_processor(clk, rst);
               .memRead(memRead),
               .memWrite(memWrite),
               .IRWrite(IRWrite),
-              .memToReg(memToReg),
+              .memToAcc(memToAcc),
               .accWrite(accWrite),
               .ALUSrcA(ALUSrcA),
               .ALUSrcB(ALUSrcB),
@@ -28,7 +28,7 @@ module multicycle_mips_processor(clk, rst);
                 .memRead(memRead),
                 .memWrite(memWrite),
                 .IRWrite(IRWrite),
-                .memToReg(memToReg),
+                .memToAcc(memToAcc),
                 .accWrite(accWrite),
                 .ALUSrcA(ALUSrcA),
                 .ALUSrcB(ALUSrcB),
